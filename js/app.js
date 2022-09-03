@@ -9,7 +9,6 @@ const loadCatagory = () => {
 const displayMenuBar = (data) => {
     
     const menuContainer = document.getElementById("menu-Container")
-    
     data.news_category.forEach(menu => {
         
         const ulList = document.createElement('ul')
@@ -21,11 +20,13 @@ const displayMenuBar = (data) => {
         </li>
         `
         menuContainer.appendChild(ulList)
+        
     })
     
 }
 
 const loadNewsByCategory = (category_id) => {
+    
     let categoryId = category_id
     if (categoryId > 0  && categoryId < 10) {
         categoryId = "0" + categoryId
@@ -37,11 +38,18 @@ const loadNewsByCategory = (category_id) => {
         .catch(error => console.log(error));
 }
 
+
+// News Details Card Code
+let count = []
 const displayNewsByCatagory = (menu) => {
     menu.data.forEach(eachMenu => {
+        const counter = document.getElementById("counter")
+        counter.innerText = count.push(eachMenu.length)
         console.log(eachMenu)
+        
         const newsContainer = document.getElementById("displayNewsContainer")
         const newsDiv = document.createElement('div')
+        
         newsDiv.classList.add('col')
         newsDiv.innerHTML = `
         <div class="card mb-5">
@@ -52,22 +60,20 @@ const displayNewsByCatagory = (menu) => {
         </div>
         <div>
         <img class="author-image" src="${eachMenu.author.img}" class="card-img-top" alt="...">
-        <p class="card-text">${eachMenu.author.name}.</p>
+        <p class="card-text">${eachMenu.author? eachMenu.author.name : "No Author Information Found"}.</p>
         </div>
-        <p>Total View: ${eachMenu.total_view}</p>
+        <p>Total View: ${eachMenu ? eachMenu.total_view : "No Information Found"}</p>
         <button class="btn btn-primary w-25 d-block mx-auto mb-5">Show Details</button>
         `
         
         newsContainer.appendChild(newsDiv)
-       
-        
-    })
+   })
 
     loadSpinner(false)
-
-   
-    
 }
+
+
+// Spinner Section Code
 
 const loadSpinner = (isLoading) => {
     const spinner = document.getElementById('loadSpinner')

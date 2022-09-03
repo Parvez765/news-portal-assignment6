@@ -42,11 +42,15 @@ const loadNewsByCategory = (category_id) => {
 
 // News Details Card Code
 
-let count = []
+
 const displayNewsByCatagory = (menu) => {
-    menu.data.forEach(eachMenu => {
-        const newsContainer = document.getElementById("displayNewsContainer")
-        
+    
+
+     const counter = document.getElementById("counter")
+        counter.innerText = menu.data.length
+        let newsContainer = document.getElementById("displayNewsContainer")
+        newsContainer.innerHTML = ""
+        menu.data.forEach(eachMenu => {
         const newsDiv = document.createElement('div')
         console.log(eachMenu)
         
@@ -67,14 +71,13 @@ const displayNewsByCatagory = (menu) => {
         <button onclick="loadModalDetails('${eachMenu.id}')" class="btn btn-primary w-25 d-block mx-auto mb-5" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
         `
         
-        const counter = document.getElementById("counter")
-        counter.innerText = count.push(eachMenu.length)
-
+       
+        // newsContainer = ""
         newsContainer.appendChild(newsDiv)
        
     })
     
-
+    
     loadSpinner(false)
 }
 

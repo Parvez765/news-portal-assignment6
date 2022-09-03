@@ -50,7 +50,11 @@ const displayNewsByCatagory = (menu) => {
         counter.innerText = menu.data.length
         let newsContainer = document.getElementById("displayNewsContainer")
         newsContainer.innerHTML = ""
-        menu.data.forEach(eachMenu => {
+    
+        let allNews = menu.data
+        allNews.sort((a, b) => b.total_view - a.total_view)
+    
+        allNews.forEach(eachMenu => {
         const newsDiv = document.createElement('div')
         console.log(eachMenu._id)
         
@@ -80,7 +84,6 @@ const displayNewsByCatagory = (menu) => {
 
     loadSpinner(false)
 }
-
 
 // Spinner Section Code
 

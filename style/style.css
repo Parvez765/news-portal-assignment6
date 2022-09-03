@@ -13,3 +13,8 @@
     display: inline-block;
     justify-content: space-evenly;
 }
+
+.author-image{
+    border-radius: 50px;
+    width: 80px;
+}

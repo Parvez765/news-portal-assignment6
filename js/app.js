@@ -71,9 +71,9 @@ const displayNewsByCatagory = (menu) => {
         </div>
         <div>
         <img class="author-image" src="${eachMenu.author? eachMenu.author.img : "No Information Found"}" class="card-img-top" alt="...">
-        <p class="card-text">${eachMenu.author? eachMenu.author.name : "No Author Information Found"}.</p>
+        <p class="card-text">${eachMenu.author.name? eachMenu.author.name : "No Author Information Found"}.</p>
         </div>
-        <p>Total View: ${eachMenu ? eachMenu.total_view : "No Information Found"}</p>
+        <p>Total View: ${eachMenu.total_view === null? "No Information Found" : eachMenu.total_view === 0 ?  "0" : eachMenu.total_view}</p>
         <button onclick="loadModalDetails('${eachMenu._id}')" class="btn btn-primary w-25 d-block mx-auto mb-5" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
         `
         
@@ -116,7 +116,8 @@ const loadModal = (data) => {
     modalBody.innerHTML = `
         <img src="${data.thumbnail_url}" class="card-img-top" alt="...">
         <img class="author-image mt-5 mb-3" src="${data.author? data.author.img : "No Image Found"}" class="card-img-top" alt="...">
-        <p>Author Name: ${data.author? data.author.name : "No Information Found"}</p>
+        <p>Author Name: ${data.author.name? data.author.name : "No Information Found"}</p>
+       
         <p>Published Date: ${data.author? data.author.published_date : "No Information Found"}</p>
         <p>Rating: ${data.rating? data.rating.number : "No Information Found"}</p>
     

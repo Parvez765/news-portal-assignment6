@@ -52,7 +52,7 @@ const displayNewsByCatagory = (menu) => {
         newsContainer.innerHTML = ""
         menu.data.forEach(eachMenu => {
         const newsDiv = document.createElement('div')
-        console.log(eachMenu)
+        console.log(eachMenu._id)
         
         
         newsDiv.classList.add('col')
@@ -68,7 +68,7 @@ const displayNewsByCatagory = (menu) => {
         <p class="card-text">${eachMenu.author? eachMenu.author.name : "No Author Information Found"}.</p>
         </div>
         <p>Total View: ${eachMenu ? eachMenu.total_view : "No Information Found"}</p>
-        <button onclick="loadModalDetails('${eachMenu.id}')" class="btn btn-primary w-25 d-block mx-auto mb-5" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
+        <button onclick="loadModalDetails('${eachMenu._id}')" class="btn btn-primary w-25 d-block mx-auto mb-5" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
         `
         
        
@@ -77,7 +77,7 @@ const displayNewsByCatagory = (menu) => {
        
     })
     
-    
+
     loadSpinner(false)
 }
 
@@ -96,10 +96,11 @@ const loadSpinner = (isLoading) => {
 // Modal Section Code
 
 const loadModalDetails = (news_id) => {
+    console.log("This is News Id", news_id)
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => loadModal(data.data))
+        .then(data => loadModal(data.data[0]))
         .catch(error => console.log(error));
 }
 

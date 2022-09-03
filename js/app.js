@@ -55,11 +55,13 @@ const displayNewsByCatagory = (menu) => {
         allNews.sort((a, b) => b.total_view - a.total_view)
     
         allNews.forEach(eachMenu => {
+            console.log(eachMenu)
         const newsDiv = document.createElement('div')
-        console.log(eachMenu._id)
+        // console.log(eachMenu._id)
         
         
         newsDiv.classList.add('col')
+        
         newsDiv.innerHTML = `
         <div class="card mb-5">
         <img src="${eachMenu.image_url}" class="card-img-top" alt="...">
@@ -68,7 +70,7 @@ const displayNewsByCatagory = (menu) => {
         <p class="card-text">${eachMenu.details.slice(0, 200)}...</p>
         </div>
         <div>
-        <img class="author-image" src="${eachMenu.author.img}" class="card-img-top" alt="...">
+        <img class="author-image" src="${eachMenu.author? eachMenu.author.img : "No Information Found"}" class="card-img-top" alt="...">
         <p class="card-text">${eachMenu.author? eachMenu.author.name : "No Author Information Found"}.</p>
         </div>
         <p>Total View: ${eachMenu ? eachMenu.total_view : "No Information Found"}</p>
@@ -99,7 +101,7 @@ const loadSpinner = (isLoading) => {
 // Modal Section Code
 
 const loadModalDetails = (news_id) => {
-    console.log("This is News Id", news_id)
+    // console.log("This is News Id", news_id)
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     fetch(url)
         .then(res => res.json())
@@ -113,6 +115,10 @@ const loadModal = (data) => {
     const modalBody = document.getElementById("modalBody")
     modalBody.innerHTML = `
         <img src="${data.thumbnail_url}" class="card-img-top" alt="...">
+        <img class="author-image mt-5 mb-3" src="${data.author? data.author.img : "No Image Found"}" class="card-img-top" alt="...">
+        <p>Author Name: ${data.author? data.author.name : "No Information Found"}</p>
+        <p>Published Date: ${data.author? data.author.published_date : "No Information Found"}</p>
+        <p>Rating: ${data.rating? data.rating.number : "No Information Found"}</p>
     
     `
 }
